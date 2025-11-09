@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p-splitter [panelSizes]="[30, 75, 25]" [style]="{ height: '900px' }" class="mb-8">
+    <ng-template #panel>
+        <div class="flex flex-col w-full max-w-7xl mx-auto gap-6 flex-1">
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+            <p-select-projects></p-select-projects> 
+            </div>
+            <div>
+            <p-newproject-dialog />
+            </div>
+        </div>
+        </div>
+        <br>
+            <p-divider type="solid" />
+        <br>
+        <div class="card">
+            <p-tabs value="0">
+                <p-tablist>
+                    <p-tab value="0" >Objects</p-tab>
+                    <p-tab value="1" >Parameters</p-tab>
+                </p-tablist>
+                <p-tabpanels>
+                    <p-tabpanel value="0" >
+                        <p-scrollpanel [style]="{ width: '100%', height: '450px' }">
+                            <p-object-treelist></p-object-treelist>
+                        </p-scrollpanel>
+                    </p-tabpanel>
+                    <p-tabpanel value="1">
+                        <p-parameter-treelist-component></p-parameter-treelist-component>
+                    </p-tabpanel>
+                </p-tabpanels>
+            </p-tabs>
+        </div>
+    </ng-template>
+
+    <ng-template #panel>
+        <div class="card flex justify-center">
+            <p-versions-component></p-versions-component>
+                <p-object-component></p-object-component>
+                <p-table-object-component></p-table-object-component>
+                <p-table-object-index-component></p-table-object-index-component>
+                <p-parameter-values-component></p-parameter-values-component>
+        </div>
+    </ng-template>
+       <ng-template #panel>
+        <div class="card flex justify-center">
+            <p-generate-sql-component></p-generate-sql-component>
+                
+        </div>
+    </ng-template>
+</p-splitter>
+
+<toast-response-component />
+
+   
+    </body>
+</html>

@@ -1,0 +1,60 @@
+import {Component} from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { SelectModule } from 'primeng/select';
+import { TreeModule } from 'primeng/tree';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { ToastModule } from 'primeng/toast';
+import { ProjectsComponent } from './features/projects/projects.component';
+
+import { TreelistComponent } from './features/treelist/treelist.component';
+import { NewProjectComponent } from './features/newproject/newproject.component';
+import { SplitterModule } from 'primeng/splitter';
+import { PanelModule } from 'primeng/panel';
+import { DividerModule } from 'primeng/divider';
+import { ObjectComponent } from './features/object/object.component';
+import { ResponseComponent } from './core/response/response.component';
+import { TableObjectComponent } from './features/table-object/table-object.component';
+import { VersionsComponent } from './features/versions/versions.component';
+import { TableObjectIndexComponent } from './features/table-object-index/table.object.index.component';
+import { TabsModule } from 'primeng/tabs';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { ParameterTreelistComponent } from './features/parameters/parameter.treelist.component/parameter.treelist.component';
+import { ParameterValuesComponent } from './features/parameters/parameter.values.component/parameter.values.component';
+import { GenerateSqlComponent } from './features/generators/generate.sql.component/generate.sql.component';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.html',
+  styleUrl: './app.css',
+  imports: [
+    TreelistComponent, 
+    SelectModule, 
+    FormsModule, 
+    TreeModule, 
+    ContextMenuModule, 
+    ToastModule, 
+    NewProjectComponent, 
+    ProjectsComponent,
+    SplitterModule,
+    PanelModule,
+    DividerModule,
+    ObjectComponent,
+    ResponseComponent,
+    TableObjectComponent,
+    VersionsComponent,
+    TableObjectIndexComponent,
+    TabsModule,
+    ScrollPanelModule,
+    ParameterTreelistComponent,
+    ParameterValuesComponent,
+    GenerateSqlComponent
+  ],
+
+  standalone: true
+})
+
+export class App {
+
+}
+
+
