@@ -6,6 +6,7 @@ import { GenerateSqlComponent } from "../../generators/generate.sql.component/ge
   imports: [GenerateSqlComponent],
   templateUrl: './main.right.split.html',
   styleUrl: './main.right.split.scss',
+  standalone:true,
 })
 export class MainRightSplit {
 

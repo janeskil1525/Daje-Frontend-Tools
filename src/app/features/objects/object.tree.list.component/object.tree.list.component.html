@@ -1,0 +1,9 @@
+
+<p-tree 
+[value]=nodes
+class="w-full md:w-[30rem]" s
+selectionMode="single" 
+[(selection)]="selectedNode" 
+(onNodeSelect)="nodeSelect($event)"
+[contextMenu]="cm" />
+<p-contextmenu #cm [model]="items"  />
