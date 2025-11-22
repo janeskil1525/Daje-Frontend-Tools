@@ -62,7 +62,7 @@ export class TableObjectComponent {
       this.initializeNew();      
     } else if (tools_object_tables_pkey > 0 && this.isVisible) {
       // Load table object
-      this.dbservice.load_record('TableObject', tools_object_tables_pkey).subscribe((response) => {        
+      /*this.dbservice.load_record('TableObject', tools_object_tables_pkey).subscribe((response) => {
         this.payload = (
           this.dbservice.process_response(
             response,
@@ -73,7 +73,7 @@ export class TableObjectComponent {
         if(this.payload.visible) this.payload.visible = true;
         this.tools_objects_tables_datatypes_pkey = this.payload.tools_objects_tables_datatypes_fkey        
         this.setupGUI(this.tools_objects_tables_datatypes_pkey);
-      });
+      });*/
     }
 
   }

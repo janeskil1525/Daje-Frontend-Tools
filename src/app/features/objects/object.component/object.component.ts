@@ -78,7 +78,7 @@ export class ObjectComponent {
 
   showWin(tools_object_pkey:number) {
     if(this.objectGUI.getVisibility() === true) {
-      this.isVisible = true;
+      /*this.isVisible = true;
       this.dbservice.load_record('Object', tools_object_pkey).subscribe((response)=> {
           this.responseservice.sendResponse(response);
           let access = (key: string) => {
@@ -92,7 +92,7 @@ export class ObjectComponent {
             this.tools_object_types_pkey = this.objectGUI.getObjectType();
           }
           
-      })
+      })*/
     } else {
       this.isVisible = false;
       this.payload = this.initialInterface();

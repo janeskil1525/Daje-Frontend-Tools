@@ -7,18 +7,20 @@ import { TabsModule } from 'primeng/tabs';
 import {ObjectTreelistComponent} from "../../objects/object.tree.list.component/object.tree.list.component";
 import {ParameterTreelistComponent} from "../../parameters/parameter.treelist.component/parameter.treelist.component";
 import { PanelModule } from 'primeng/panel';
+import {RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-main-left-split',
-  imports: [
-      ProjectsComponent,
-      ProjectNewComponent,
-      DividerModule,
-      TabsModule,
-      ScrollPanelModule,
-      ObjectTreelistComponent,
-      ParameterTreelistComponent,
-      PanelModule
+    imports: [
+        ProjectsComponent,
+        ProjectNewComponent,
+        DividerModule,
+        TabsModule,
+        ScrollPanelModule,
+        ObjectTreelistComponent,
+        ParameterTreelistComponent,
+        PanelModule,
+        RouterOutlet
     ],
   templateUrl: './main.left.split.html',
   styleUrl: './main.left.split.scss',

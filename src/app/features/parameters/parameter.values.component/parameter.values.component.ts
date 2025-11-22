@@ -1,6 +1,5 @@
 import { Component, input } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { DatabaseService } from '../../../core/database/database.service';
 import { CommonModule } from '@angular/common';
 import { ParameterValuesLoadService } from './parameter.values.load.service';
 import { InputTextModule } from 'primeng/inputtext';
@@ -32,26 +31,32 @@ import { WorkflowService } from '../../../core/workflow/workflow.service';
 export class ParameterValuesComponent {
   loadGUISub!:Subscription;
   isVisible:boolean = true;
-  payload:ParameterValuesInterface = this.initialInterface();
 
-  tools_parameters_pkey = input.required<number>();
-  tools_projects_pkey = input.required<number>();
+  /*tools_parameters_pkey = input.required<number>({
+    //transform: (maybeUndefined: number | undefined) => maybeUndefined ?? 0,
+  });
 
-  test =1;
+  tools_projects_pkey = input.required<number>({
+    //transform: (maybeUndefined: number | undefined) => maybeUndefined ?? 0,
+  });*/
+
+  payload = input.required<ParameterValuesInterface>();
+
+  test = 1;
+
   constructor(
-      private dbservice: DatabaseService, 
       private loadGUIService: ParameterValuesLoadService,
       private workflowservice: WorkflowService,
   ){}
 
   ngOnInit() {
-    this.showWin(this.tools_projects_pkey, this.tools_parameters_pkey);
+    // this.showWin(this.tools_projects_pkey(), this.tools_parameters_pkey());
 
   }
 
   showWin(tools_projects_pkey:number, tools_parameters_pkey:number) {
 
-      this.dbservice.setKey2(tools_parameters_pkey)
+     /* this.dbservice.setKey2(tools_parameters_pkey)
       this.dbservice.load_record('ParameterValue', tools_projects_pkey).subscribe((response) => {
           this.payload = (
             this.dbservice.process_response(
@@ -59,12 +64,12 @@ export class ParameterValuesComponent {
               this.initialInterface(),
             {}) as unknown) as ParameterValuesInterface;
           if(this.payload.active) this.payload.active = true;
-      });
+      });*/
 
   }
 
   saveTableObject() {
-    
+   /*
     this.payload.tools_projects_fkey = this.loadGUIService.getTools_projects_pkey();
     this.payload.tools_parameters_fkey = this.loadGUIService.getTools_parameters_pkey();
     //if(!this.payload.active) this.payload.active = false;   
@@ -73,7 +78,7 @@ export class ParameterValuesComponent {
         'tools', 'save_parameter_value', this.payload
     );
 
-    //this.isVisible = false;
+    //this.isVisible = false;*/
   }
 
   winVisible(visible:boolean) {

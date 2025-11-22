@@ -43,13 +43,13 @@ export class ObjectTreelistComponent{
   ) {};
 
     ngOnInit() {
-      this.loadTreelistDataSub = this.loadTreeListService.getClickEvent().subscribe(()=>{
+      this.loadTreelistDataSub = this.loadTreeListService.getClickEvent().subscribe(()=> {
+
         let tools_projects_pkey = this.loadTreeListService.getTools_projects_pkey()
-          this.dbservice.load_record('Treelist', tools_projects_pkey).subscribe((response) => {
-            this.nodes = ((this.dbservice.process_response(response,[]) as unknown) as any)
-          });
+        this.dbservice.setKey2(tools_projects_pkey);
+        this.dbservice.load_record('Treelist', [], tools_projects_pkey) as unknown) as any)
       });
-  }
+    }
 
   nodeSelect(event:any) {
     let type = this.getType(event.node);

@@ -45,9 +45,9 @@ export class TableObjectViewComponent {
   showWin(tools_object_views_pkey:number) {
     if(this.viewGUI.getVisibility()) {
       this.isVisible = true;
-      this.dbservice.load_record('View',tools_object_views_pkey).subscribe((response)=> {          
+      /*this.dbservice.load_record('View',tools_object_views_pkey).subscribe((response)=> {
         this.payload = (this.dbservice.process_response(response, this.initialInterface()) as unknown) as TableObjectViewInterface;        
-      })
+      })*/
     } else {
       this.isVisible = false;
       this.payload = this.initialInterface()

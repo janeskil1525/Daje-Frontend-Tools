@@ -1,10 +1,10 @@
-import { Injectable, inject } from '@angular/core';
-import { Observable }  from 'rxjs';
-import { LocalStorageService } from '../localstorage/local-storage.service';
-import { ResponseInterface } from '../response/response.interface';
-import { HttpClient } from '@angular/common/http';
-import { EndPoint } from './endpoints';
-import { ResponseService } from '../response/response.service';
+import {inject, Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {LocalStorageService} from '../localstorage/local-storage.service';
+import {ResponseInterface} from '../response/response.interface';
+import {HttpClient} from '@angular/common/http';
+import {EndPoint} from './endpoints';
+import {ResponseService} from '../response/response.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class DatabaseService {
     private responseservice: ResponseService,
   ) {}
 
-  public load_record(endpoint:string, load_pkey:number ): Observable<ResponseInterface> {
+  public load_record(endpoint:string, default_val:any, load_pkey:number ): Observable<any> {
       this.localkey = this.localstorage.getItem('X-Token-Check')!;
       if(this.key2 > -1) {
         this.end.setKey2(this.key2);
@@ -32,14 +32,14 @@ export class DatabaseService {
         this.end.setKey2(-1);
         this.key2 = -1;
       }
-      
-      let response = this.http.get <ResponseInterface> (url,{
-        headers:{
-          'X-Token-Check': this.localkey
-        }
+
+      let data =  this.http.get <ResponseInterface>(url, {
+          headers: {
+              'X-Token-Check': this.localkey
+          }
       });
-      
-      return response;
+
+       return this.process_response(data, default_val,{}) ;
   }
 
   public load_all_records(endpoint:string ): Observable<ResponseInterface> {

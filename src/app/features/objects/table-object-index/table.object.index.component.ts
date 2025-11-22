@@ -45,9 +45,9 @@ export class TableObjectIndexComponent {
   showWin(tools_object_index_pkey:number) {
     this.isVisible = this.tableobjectindexGUIservice.getVisibility();
     if(this.isVisible) {
-      this.dbservice.load_record('ObjectIndex', tools_object_index_pkey).subscribe((response)=> {
+     /* this.dbservice.load_record('ObjectIndex', tools_object_index_pkey).subscribe((response)=> {
         this.payload = (this.dbservice.process_response(response, this.initialInterface()) as unknown) as TableObjectIndexInterface;
-      })
+      })*/
     } else {
       this.payload = this.initialInterface();
     }

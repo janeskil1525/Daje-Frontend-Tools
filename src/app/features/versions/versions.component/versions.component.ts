@@ -42,10 +42,10 @@ export class VersionsComponent {
   showWin(tools_version_pkey: any) {    
     if(this.versionsGUI.getVisibility() === true) {
       this.isVisible = true;
-      this.dbservice.load_record('Versions',tools_version_pkey).subscribe((response)=> {          
+     /* this.dbservice.load_record('Versions',tools_version_pkey).subscribe((response)=> {
           this.payload = response as unknown as VersionsInterface ;
           if(this.payload.locked) this.payload.locked = true;
-      })
+      })*/
     } else {
       this.isVisible = false;
       this.payload = this.initialInterface();
