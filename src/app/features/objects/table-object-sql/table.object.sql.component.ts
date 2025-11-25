@@ -17,7 +17,6 @@ import { DatabaseService } from '../../../core/database/database.service';
     FloatLabel,
     ButtonModule,
     CardModule,
-
   ],
   templateUrl: './table.object.sql.component.html',
   styleUrl: './table.object.sql.component.css'

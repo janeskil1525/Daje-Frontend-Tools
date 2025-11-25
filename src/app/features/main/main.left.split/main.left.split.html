@@ -12,21 +12,6 @@
     </div>
     <p-divider type="solid" />
     <div class="card">
-        <p-tabs value="0">
-            <p-tablist>
-                <p-tab value="0" >Objects</p-tab>
-                <p-tab value="1" >Parameters</p-tab>
-            </p-tablist>
-            <p-tabpanels>
-                <p-tabpanel value="0" >
-                    <p-scrollpanel [style]="{ width: '100%', height: '450px' }">
-                        <router-outlet name='left_split_object_tree'> </router-outlet>
-                    </p-scrollpanel>
-                </p-tabpanel>
-                <p-tabpanel value="1">
-                    <app-parameter-treelist-component></app-parameter-treelist-component>
-                </p-tabpanel>
-            </p-tabpanels>
-        </p-tabs>
+        <router-outlet name='left_split_object_tree'> </router-outlet>
     </div>
 </div>

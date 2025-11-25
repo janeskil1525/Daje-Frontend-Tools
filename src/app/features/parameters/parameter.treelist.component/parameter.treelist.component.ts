@@ -28,17 +28,17 @@ export class ParameterTreelistComponent {
   paramTreelist!:Subscription;
 
   constructor(
-      private dbservice: DatabaseService, 
-      private ParamTreeListService: ParameterTreelistLoadService,
-      private loadValueGUIService: ParameterValuesLoadService,
+    private dbservice: DatabaseService,
+    private ParamTreeListService: ParameterTreelistLoadService,
+    private loadValueGUIService: ParameterValuesLoadService,
   ){}
 
   ngOnInit() {
-    this.paramTreelist = this.ParamTreeListService.getClickEvent().subscribe(()=>{
+    /*this.paramTreelist = this.ParamTreeListService.getClickEvent().subscribe(()=>{
         this.dbservice.load_all_records('ParamTreelist').subscribe(response => {
           this.paramnodes = ((this.dbservice.process_response(response,[]) as unknown) as any)
         });
-    });
+    });*/
   }
 
   nodeSelect(event:any) {

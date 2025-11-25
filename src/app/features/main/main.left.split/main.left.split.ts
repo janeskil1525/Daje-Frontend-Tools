@@ -2,11 +2,6 @@ import { Component } from '@angular/core';
 import { ProjectsComponent } from '../../project/projects.component/projects.component';
 import { ProjectNewComponent } from "../../project/project.new.component/project.new.component";
 import { DividerModule } from 'primeng/divider';
-import { ScrollPanelModule } from 'primeng/scrollpanel';
-import { TabsModule } from 'primeng/tabs';
-import {ObjectTreelistComponent} from "../../objects/object.tree.list.component/object.tree.list.component";
-import {ParameterTreelistComponent} from "../../parameters/parameter.treelist.component/parameter.treelist.component";
-import { PanelModule } from 'primeng/panel';
 import {RouterOutlet} from "@angular/router";
 
 @Component({
@@ -15,11 +10,6 @@ import {RouterOutlet} from "@angular/router";
         ProjectsComponent,
         ProjectNewComponent,
         DividerModule,
-        TabsModule,
-        ScrollPanelModule,
-        ObjectTreelistComponent,
-        ParameterTreelistComponent,
-        PanelModule,
         RouterOutlet
     ],
   templateUrl: './main.left.split.html',

@@ -47,9 +47,9 @@ export class TableObjectComponent {
   ){ }
     
    ngOnInit() {
-    this.dbservice.load_all_records('TableObjectDatatypes').subscribe((response) => {
+ /*   this.dbservice.load_all_records('TableObjectDatatypes').subscribe((response) => {
       this.datatypes = (this.dbservice.process_response(response, this.initialInterface()) as unknown) as TableObjectDatatypeInterface[];        
-    });
+    });*/
 
     this.clickEventsubscription = this.tableObjecteGUI.getClickEvent().subscribe((tools_object_tables_pkey) => {
         this.showWin(tools_object_tables_pkey);

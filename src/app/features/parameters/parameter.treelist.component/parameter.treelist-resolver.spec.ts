@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { ResolveFn } from '@angular/router';
 
-import { parameterValuesResolverResolver } from './parameter.values.resolver';
+import { parameterTreelistResolver } from './parameter.treelist-resolver';
 
-describe('parameterValuesResolverResolver', () => {
+describe('parameterTreelistResolver', () => {
   const executeResolver: ResolveFn<boolean> = (...resolverParameters) => 
-      TestBed.runInInjectionContext(() => parameterValuesResolverResolver(...resolverParameters));
+      TestBed.runInInjectionContext(() => parameterTreelistResolver(...resolverParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
