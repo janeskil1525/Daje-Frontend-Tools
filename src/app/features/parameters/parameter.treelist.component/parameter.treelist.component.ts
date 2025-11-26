@@ -7,6 +7,8 @@ import { TreeModule } from 'primeng/tree';
 import { BadgeModule } from 'primeng/badge';
 import { ParameterValuesLoadService } from '../parameter.values.component/parameter.values.load.service';
 import { Router } from '@angular/router';
+import {ObjectTreeListInterface} from "../../objects/object.tree.list.component/object.tree.list.interface";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-parameter-treelist-component',
@@ -23,15 +25,20 @@ import { Router } from '@angular/router';
 
 export class ParameterTreelistComponent {
   private router = inject(Router);
+    private activatedRoute = inject(ActivatedRoute);
   paramnodes:any;
   selected: string = "";
   paramTreelist!:Subscription;
 
   constructor(
-    private dbservice: DatabaseService,
+    private database: DatabaseService,
     private ParamTreeListService: ParameterTreelistLoadService,
     private loadValueGUIService: ParameterValuesLoadService,
-  ){}
+  ){
+      this.database.load_all_records('ParamTreelist').subscribe((response: ObjectTreeListInterface[]) => {
+          this.paramnodes = response;
+      });
+  }
 
   ngOnInit() {
     /*this.paramTreelist = this.ParamTreeListService.getClickEvent().subscribe(()=>{
