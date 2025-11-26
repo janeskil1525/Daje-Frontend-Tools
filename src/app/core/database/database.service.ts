@@ -9,6 +9,7 @@ import {UserLoginService} from "../../features/user/login/user.login.service";
 @Injectable({
   providedIn: 'root'
 })
+
 export class DatabaseService {
   private local_key: string = '';
   private http = inject(HttpClient);
@@ -33,7 +34,7 @@ export class DatabaseService {
         this.key2 = -1;
       }
 
-      return this.http.get <ResponseInterface>(url, {
+      return this.http.get <any>(url, {
           headers: {
               'X-Token-Check': this.local_key
           }

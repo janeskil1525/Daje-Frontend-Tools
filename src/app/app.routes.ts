@@ -4,6 +4,7 @@ import { ParameterValuesComponent } from "./features/parameters/parameter.values
 //import {parameterValuesResolver} from "./features/parameters/parameter.values.component/parameter.values.resolver";
 import {objectTreeListResolver} from "./features/objects/object.tree.list.component/object.tree.list-resolver";
 import {TabsTreelistsComponent} from "./features/menu/tabs.treelists.component/tabs.treelists.component";
+import {parameterValuesResolver} from "./features/parameters/parameter.values.component/parameter.values-resolver";
 
 
 export const routes: Routes = [
@@ -14,30 +15,17 @@ export const routes: Routes = [
         component: MainComponent,
         title: 'Main',
         children:[
-
             {
-                path:'app-tabs-treelists-component/:tools_projects_pkey',
-                component:TabsTreelistsComponent,
-                outlet:'left_split_object_tree',
-                children:[
-                    {
-                        path:'parameter-value/:tools_parameters_pkey/:tools_projects_pkey',
-                        component: ParameterValuesComponent,
-                        outlet: 'middle_split',
-                        resolve: {
+                path: 'app-tabs-treelists-component/:tools_projects_pkey',
+                component: TabsTreelistsComponent,
+                outlet: 'left_split_object_tree',
+            },
+            {
+                path:'parameter-value/:tools_parameters_pkey/:tools_projects_pkey',
+                component: ParameterValuesComponent,
+                outlet: 'middle_split',
 
-
-                        }
-                    },
-                    {
-                        path:'parameter-value',
-                        component: ParameterValuesComponent,
-                        outlet: 'middle_split',
-
-                    },
-                ]
-            }
-
+            },
         ]
     },
     {

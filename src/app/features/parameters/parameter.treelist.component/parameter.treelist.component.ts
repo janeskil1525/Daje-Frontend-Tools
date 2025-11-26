@@ -1,14 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DatabaseService } from '../../../core/database/database.service';
-import { ParameterTreelistLoadService } from './parameter.treelist.load.service'
 import { CommonModule } from '@angular/common';
 import { TreeModule } from 'primeng/tree';
 import { BadgeModule } from 'primeng/badge';
-import { ParameterValuesLoadService } from '../parameter.values.component/parameter.values.load.service';
-import { Router } from '@angular/router';
-import {ObjectTreeListInterface} from "../../objects/object.tree.list.component/object.tree.list.interface";
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import { ObjectTreeListInterface } from "../../objects/object.tree.list.component/object.tree.list.interface";
 
 @Component({
   selector: 'app-parameter-treelist-component',
@@ -16,7 +13,6 @@ import { ActivatedRoute } from '@angular/router';
     TreeModule,  
     BadgeModule, 
     CommonModule,
-
   ],
   templateUrl: './parameter.treelist.component.html',
   styleUrl: './parameter.treelist.component.css',
@@ -24,17 +20,19 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class ParameterTreelistComponent {
-  private router = inject(Router);
+    private router = inject(Router);
+    paramnodes: any;
+    selected: string = "";
+    paramTreelist!:Subscription;
     private activatedRoute = inject(ActivatedRoute);
-  paramnodes:any;
-  selected: string = "";
-  paramTreelist!:Subscription;
 
+    tools_projects_pkey: number = 0;
   constructor(
     private database: DatabaseService,
-    private ParamTreeListService: ParameterTreelistLoadService,
-    private loadValueGUIService: ParameterValuesLoadService,
   ){
+      this.activatedRoute.params.subscribe((params) => {
+          this.tools_projects_pkey = params['tools_projects_pkey'];
+      });
       this.database.load_all_records('ParamTreelist').subscribe((response: ObjectTreeListInterface[]) => {
           this.paramnodes = response;
       });
@@ -50,14 +48,22 @@ export class ParameterTreelistComponent {
 
   nodeSelect(event:any) {
 
-    this.router.navigate(['main',{ outlets: { middle_split: ['parameter-value', event.node.data.tools_parameters_pkey,  this.ParamTreeListService.getTools_projects_pkey()] } } ]);
-    /*let type = this.getType(event.node);
-    if ( type.length < 17 && type.indexOf("tools_parameter") > -1 ) {        
-        this.loadValueGUIService.sendClickEvent(
-          this.ParamTreeListService.getTools_projects_pkey(), 
-          event.node.data.tools_parameters_pkey, true
-        );
-    }*/
+      let tools_parameters_pkey = event.node.data.tools_parameters_pkey
+      let tools_projects_pkey = this.tools_projects_pkey;
+    this.router.navigate(
+        ['main',
+            {
+                outlets: {
+                    middle_split:
+                        ['parameter-value',
+                            tools_parameters_pkey,
+                            tools_projects_pkey
+                        ]
+                }
+            }
+        ]
+    );
+
   }
 
   getType(node: any) {

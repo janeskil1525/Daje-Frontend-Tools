@@ -1,5 +1,4 @@
-import { Component, input } from '@angular/core';
-import { Subscription } from 'rxjs';
+import {Component, inject, input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ParameterValuesLoadService } from './parameter.values.load.service';
 import { InputTextModule } from 'primeng/inputtext';
@@ -11,7 +10,8 @@ import { ParameterValuesInterface } from './parameter.values.interface';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TextareaModule } from 'primeng/textarea';
 import { WorkflowService } from '../../../core/workflow/workflow.service';
-
+import {ActivatedRoute} from '@angular/router';
+import {DatabaseService} from "../../../core/database/database.service";
 @Component({
   selector: 'app-parameter-values-component',
   imports: [
@@ -29,25 +29,22 @@ import { WorkflowService } from '../../../core/workflow/workflow.service';
 })
 
 export class ParameterValuesComponent {
-  loadGUISub!:Subscription;
-  isVisible:boolean = true;
-
-  /*tools_parameters_pkey = input.required<number>({
-    //transform: (maybeUndefined: number | undefined) => maybeUndefined ?? 0,
-  });
-
-  tools_projects_pkey = input.required<number>({
-    //transform: (maybeUndefined: number | undefined) => maybeUndefined ?? 0,
-  });*/
-
-  payload = input.required<ParameterValuesInterface>();
-
-  test = 1;
-
-  constructor(
-      private loadGUIService: ParameterValuesLoadService,
-      private workflowservice: WorkflowService,
-  ){}
+    private activatedRoute = inject(ActivatedRoute);
+    payload = {} as ParameterValuesInterface;
+    constructor(
+      private work_flow_service: WorkflowService,
+      private database: DatabaseService
+    ){
+        this.activatedRoute.params.subscribe((params) => {
+            let tools_projects_pkey = parseInt(params['tools_projects_pkey']);
+            let tools_parameters_pkey = parseInt(params['tools_parameters_pkey']);
+            this.database.setKey2( tools_parameters_pkey );
+            this.database.load_record('ParameterValue', tools_projects_pkey).subscribe((response: ParameterValuesInterface)=> {
+               this.payload = response
+                if(this.payload.active) this.payload.active=true;
+            });
+        });
+    }
 
   ngOnInit() {
     // this.showWin(this.tools_projects_pkey(), this.tools_parameters_pkey());
@@ -72,17 +69,17 @@ export class ParameterValuesComponent {
    /*
     this.payload.tools_projects_fkey = this.loadGUIService.getTools_projects_pkey();
     this.payload.tools_parameters_fkey = this.loadGUIService.getTools_parameters_pkey();
-    //if(!this.payload.active) this.payload.active = false;   
-
-    this.workflowservice.callWorkflow(
+    if(!this.payload.active) this.payload.active = false;
+*/
+    this.work_flow_service.callWorkflow(
         'tools', 'save_parameter_value', this.payload
     );
 
-    //this.isVisible = false;*/
+
   }
 
   winVisible(visible:boolean) {
-    this.isVisible = visible;
+   // this.isVisible = visible;
   }
 
   initialInterface() {
