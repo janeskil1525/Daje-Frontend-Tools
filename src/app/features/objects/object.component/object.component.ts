@@ -42,15 +42,15 @@ export class ObjectComponent {
         private database: DatabaseService,
       ) {
         this.database.load_all_records('ObjectTypes').subscribe((response: ObjectTypeInterface[]) => {
-            this.objecttypes = response
-            //this.activatedRoute.params.subscribe((params) => {
-                /*let tools_objects_pkey = parseInt(params['tools_objects_pkey']);
+            //this.objecttypes = response
+            this.activatedRoute.params.subscribe((params) => {
+                let tools_objects_pkey = parseInt(params['tools_objects_pkey']);
                 this.database.load_record('Object', tools_objects_pkey).subscribe((response: ObjectInterface)=> {
                     this.payload = response
                     if(this.payload.active) this.payload.active=true;
-                    this.tools_object_types_pkey = this.payload.tools_object_types_fkey
-                });*/
-            //});
+                    //this.tools_object_types_pkey = this.payload.tools_object_types_fkey
+                });
+            });
         });
     }
 

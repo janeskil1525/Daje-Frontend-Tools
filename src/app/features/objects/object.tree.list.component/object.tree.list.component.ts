@@ -71,7 +71,16 @@ export class ObjectTreelistComponent{
     } else if ( type === "tools_objects2") {
 
     } else if ( type === 'tools_object_tables') {
-
+        this.router.navigate(
+            ['main',
+                {
+                    outlets: {
+                        middle_split:
+                            ['tables', data.tools_object_tables_pkey]
+                    }
+                }
+            ]
+        );
     } else if ( type === 'tools_object_index') {
 
     }

@@ -29,6 +29,11 @@ export const routes: Routes = [
                 path:'object/:tools_objects_pkey',
                 component: ObjectComponent,
                 outlet: 'middle_split',
+            },
+            {
+                path:'tables/:tools_object_tables_pkey',
+                component:TableObjectComponent,
+                outlet: 'middle_split',
             }
         ]
     },
