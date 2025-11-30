@@ -38,6 +38,8 @@ export class TableObjectComponent {
     isScaleVisible: boolean = true;
     tools_objects_tables_datatypes_pkey: number = 0;
     datatypes = [] as TableObjectDatatypeInterface[];
+    private tools_version_pkey: number = 0;
+    private tools_objects_pkey: number = 0;
 
   constructor(
     private workflowservice: WorkflowService,
@@ -46,27 +48,34 @@ export class TableObjectComponent {
       this.database.load_all_records('TableObjectDatatypes').subscribe((response: TableObjectDatatypeInterface[]) => {
           this.datatypes = response
           this.activatedRoute.params.subscribe((params) => {
-              let tools_object_tables_pkey = parseInt(params['tools_object_tables_pkey']);
+              let tools_object_tables_pkey: number = parseInt(params['tools_object_tables_pkey']);
+              this.tools_version_pkey = parseInt(params['tools_version_pkey']);
+              this.tools_objects_pkey = parseInt(params['tools_objects_pkey']);
               this.database.load_record('TableObject', tools_object_tables_pkey).subscribe((response: TableObjectInterface)=> {
                   this.payload = response
                   if(this.payload.active) this.payload.active=true;
                   if(this.payload.visible) this.payload.visible=true;
                   this.tools_objects_tables_datatypes_pkey = this.payload.tools_objects_tables_datatypes_fkey
                   this.setupGUI(this.tools_objects_tables_datatypes_pkey);
+                  if(!this.payload.tools_version_fkey || this.payload.tools_version_fkey ===0) {
+                      this.payload.tools_version_fkey = this.tools_version_pkey;
+                      this.payload.tools_objects_fkey = this.tools_objects_pkey;
+                  }
               });
           });
       });
   }
 
-
-  
   saveTableObject(tools_objects_tables_datatypes_pkey:number) {
-    this.payload.tools_objects_tables_datatypes_fkey = tools_objects_tables_datatypes_pkey;
-
-    this.workflowservice.callWorkflow(
+      this.payload.tools_version_fkey = this.tools_version_pkey;
+      this.payload.tools_objects_fkey = this.tools_objects_pkey;
+      if(!this.payload.length) {
+          this.payload.length = 0;
+      }
+      this.payload.tools_objects_tables_datatypes_fkey = tools_objects_tables_datatypes_pkey;
+      this.workflowservice.callWorkflow(
         'tools', 'save_object_table', this.payload
-    );
-
+      );
   }
 
     setupGUI(tools_objects_tables_datatypes_pkey: number) {

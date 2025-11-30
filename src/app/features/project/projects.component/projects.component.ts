@@ -33,8 +33,19 @@ export class ProjectsComponent {
   
     loadTreeList(tools_projects_pkey: number) {
         this.workflow.setConnectorData('tools_projects', tools_projects_pkey)
-        this.router.navigate(['main', {outlets: {left_split_object_tree: ['app-tabs-treelists-component', tools_projects_pkey]}}]);
+        this.database.load_record('CurrentVersion', tools_projects_pkey).subscribe((response) => {
+            this.router.navigate(['main',
+                {
+                    outlets: {
+                        left_split_object_tree:
+                            ['app-tabs-treelists-component',
+                                tools_projects_pkey, response.tools_version_pkey
+                            ]
+                    }
+                }
+                ]
+            );
+        });
     }
-
 }
 

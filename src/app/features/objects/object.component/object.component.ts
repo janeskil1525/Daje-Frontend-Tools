@@ -38,25 +38,32 @@ export class ObjectComponent {
     tools_object_types_pkey:number = 0;
 
     constructor(
-        private workflowservice: WorkflowService,
+        private workflow: WorkflowService,
         private database: DatabaseService,
       ) {
         this.database.load_all_records('ObjectTypes').subscribe((response: ObjectTypeInterface[]) => {
             this.objecttypes = response
         });
         this.activatedRoute.params.subscribe((params) => {
-            let tools_objects_pkey = parseInt(params['tools_objects_pkey']);
+            let tools_projects_pkey: number = parseInt(params['tools_projects_pkey']);
+            let tools_objects_pkey: number = parseInt(params['tools_objects_pkey']);
+            let tools_version_pkey: number  = parseInt(params['tools_version_pkey']);
+
             this.database.load_record('Object', tools_objects_pkey).subscribe((response: ObjectInterface)=> {
                 this.payload = response
                 if(this.payload.active) this.payload.active=true;
                 this.tools_object_types_pkey = this.payload.tools_object_types_fkey
+                if(!this.payload.tools_version_fkey || this.payload.tools_version_fkey === 0) {
+                    this.payload.tools_version_fkey = tools_version_pkey;
+                    this.payload.tools_projects_fkey = tools_projects_pkey;
+                }
             });
         });
     }
 
     saveObject() {
         this.payload.tools_object_types_fkey = this.tools_object_types_pkey;
-        this.workflowservice.callWorkflow(
+        this.workflow.callWorkflow(
             'tools', 'save_object', this.payload
         );
     }
@@ -65,9 +72,4 @@ export class ObjectComponent {
         this.payload = {} as ObjectInterface;
         this.objecttypes = [] as ObjectTypeInterface[];
     }
-
-  setupGUI(tools_object_types_pkey:number) {
-
-  }
-
 }

@@ -16,6 +16,7 @@ export enum EndPoints {
     Versions = 'versions/',
     ParamTreelist = 'parameters/treelist/',
     ParameterValue = 'parameters/value/',
+    CurrentVersion = 'version/',
 }
 
 export enum BaseEndpoint {

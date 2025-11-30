@@ -26,39 +26,47 @@ export class ObjectTreelistComponent{
     nodes:ObjectTreeListInterface[] = [];
     private activatedRoute = inject(ActivatedRoute);
     private router = inject(Router);
+    private tools_version_pkey: number = 0;
+    private tools_projects_pkey: number = 0;
+    private tools_objects_pkey: number = 0;
 
     constructor(
     private database: DatabaseService,
     ) {
        this.activatedRoute.params.subscribe((params) => {
-           this.database.load_record('Treelist', params['tools_projects_pkey']).subscribe((response: ObjectTreeListInterface[]) => {
+           this.tools_version_pkey = parseInt(params['tools_version_pkey'])
+           this.tools_projects_pkey = parseInt(params['tools_projects_pkey'])
+           this.database.load_record('Treelist', this.tools_projects_pkey).subscribe((response: ObjectTreeListInterface[]) => {
                this.nodes = response;
                if (!this.nodes || this.nodes.length === 0) {
                    this.addObject(0, 0)
                }
            });
        });
+        this.setupContextMenu();
     };
 
   nodeSelect(event:any) {
     let type = this.getType(event.node);
     let data = event.node.data;
     if ( type.indexOf("tools_objects") > -1 ) {
-      this.items = [
-          {label:'Table', icon: PrimeIcons.PLUS, command: (event) => this.addObject(this.selectedNode, 1)}, 
-          {label:'Index', icon: PrimeIcons.PLUS, command: (event) => this.addObject(this.selectedNode, 2)}, 
-          {label:'SQL', icon: PrimeIcons.PLUS, command: (event) => this.addObject(this.selectedNode, 3)}
-        ];
+        this.setupContextMenu();
+
     }
     if (type === "tools_version") {
 
     } else if ( type === "tools_objects1") {
+        this.tools_objects_pkey = data.tools_objects_pkey;
         this.router.navigate(
             ['main',
                 {
                     outlets: {
                         middle_split:
-                            ['object', data.tools_objects_pkey]
+                            ['object',
+                                this.tools_projects_pkey,
+                                this.tools_version_pkey,
+                                data.tools_objects_pkey
+                            ]
                     }
                 }
             ]
@@ -71,7 +79,10 @@ export class ObjectTreelistComponent{
                 {
                     outlets: {
                         middle_split:
-                            ['tables', data.tools_object_tables_pkey]
+                            ['tables',
+                                this.tools_version_pkey,
+                                this.tools_objects_pkey,
+                                data.tools_object_tables_pkey]
                     }
                 }
             ]
@@ -81,15 +92,26 @@ export class ObjectTreelistComponent{
     }
   }
 
-/*  addItem(node: any, object_type:number) {
+  addItem(node: any, object_type:number) {
     let type = this.getType(node);
     if ( type === "tools_objects1") {
-      this.versionsGUI.sendClickEvent(0,false);
-      this.objecteGUI.sendClickEvent(0,false);
-      this.tableObjecteGUI.sendClickEvent(0, true, node);
+        this.router.navigate(
+            ['main',
+                {
+                    outlets: {
+                        middle_split:
+                            ['tables',
+                                this.tools_version_pkey,
+                                node.data.tools_objects_pkey,
+                                0
+                            ]
+                    }
+                }
+            ]
+        );
     }
   }
-*/
+
   addObject(node: any, object_type:number) {
 
       this.router.navigate(
@@ -97,7 +119,7 @@ export class ObjectTreelistComponent{
               {
                   outlets: {
                       middle_split:
-                          ['object', 0]
+                          ['object', this.tools_projects_pkey,this.tools_version_pkey, 0]
                   }
               }
           ]
@@ -112,5 +134,25 @@ export class ObjectTreelistComponent{
     }
     return type;
   }
+
+    setupContextMenu() {
+        this.items = [
+            {
+                label:'Table',
+                icon: PrimeIcons.PLUS,
+                command: (event) => this.addObject(this.selectedNode, 1),
+                items:[
+                    {
+                        label: 'Field',
+                        icon: PrimeIcons.PLUS,
+                        command: (event) => this.addItem(this.selectedNode, 1)
+                    }
+                ],
+            },
+            {label:'Index', icon: PrimeIcons.PLUS, command: (event) => this.addObject(this.selectedNode, 2)},
+            {label:'SQL', icon: PrimeIcons.PLUS, command: (event) => this.addObject(this.selectedNode, 3)},
+            {label:'View', icon: PrimeIcons.PLUS, command: (event) => this.addObject(this.selectedNode, 4)}
+        ];
+    }
 }
 

@@ -16,7 +16,7 @@ export const routes: Routes = [
         title: 'Main',
         children:[
             {
-                path: 'app-tabs-treelists-component/:tools_projects_pkey',
+                path: 'app-tabs-treelists-component/:tools_projects_pkey/:tools_version_pkey',
                 component: TabsTreelistsComponent,
                 outlet: 'left_split_object_tree',
             },
@@ -26,12 +26,12 @@ export const routes: Routes = [
                 outlet: 'middle_split',
             },
             {
-                path:'object/:tools_objects_pkey',
+                path:'object/:tools_projects_pkey/:tools_version_pkey/:tools_objects_pkey',
                 component: ObjectComponent,
                 outlet: 'middle_split',
             },
             {
-                path:'tables/:tools_object_tables_pkey',
+                path:'tables/:tools_version_pkey/:tools_objects_pkey/:tools_object_tables_pkey',
                 component:TableObjectComponent,
                 outlet: 'middle_split',
             }

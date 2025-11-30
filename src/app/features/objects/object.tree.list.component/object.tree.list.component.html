@@ -1,4 +1,4 @@
-
+<div class="card">
 <p-tree 
 [value]=nodes
 class="w-full md:w-[30rem]" s
@@ -7,3 +7,4 @@ selectionMode="single"
 (onNodeSelect)="nodeSelect($event)"
 [contextMenu]="cm" />
 <p-contextmenu #cm [model]="items"  />
+</div>
