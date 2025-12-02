@@ -3,10 +3,8 @@ import { CommonModule } from '@angular/common';
 import { TreeModule } from 'primeng/tree';
 import { MenuItem, PrimeIcons } from 'primeng/api';
 import { ContextMenu } from 'primeng/contextmenu';
-import { TreelistLoadService } from '../../../core/treelist/treelist.load.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { BadgeModule } from 'primeng/badge';
-import { VersionsGuiService } from '../../versions/versions.component/versions.gui.service';
 import { DatabaseService } from '../../../core/database/database.service';
 import {ObjectTreeListInterface} from "./object.tree.list.interface";
 
@@ -40,6 +38,19 @@ export class ObjectTreelistComponent{
                this.nodes = response;
                if (!this.nodes || this.nodes.length === 0) {
                    this.addObject(0, 0)
+               } else {
+                   this.router.navigate(
+                       ['main',
+                           {
+                               outlets: {
+                                   right_split_top:
+                                       ['generators',
+                                           this.tools_projects_pkey,
+                                       ]
+                               }
+                           }
+                       ]
+                   );
                }
            });
        });

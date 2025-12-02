@@ -2,7 +2,6 @@ import { Injectable, inject } from '@angular/core';
 import {LocalStorageService} from "../../../core/localstorage/local-storage.service";
 import {Observable} from "rxjs";
 import type {ObjectTreeListInterface} from "./object.tree.list.interface";
-import {ResponseInterface} from "../../../core/response/response.interface";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 

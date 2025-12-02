@@ -41,6 +41,20 @@
                 </div>
             }
 
+            <div class="flex gap-4 mt-1 p-3">
+                <p-checkbox inputId="foreign_key" name="foreign_key" value="true" [(ngModel)]="payload.foreign_key" [binary]="true"/>
+                <label for="foreign_key" class="ml-2">Foreign key </label>
+            </div>
+            <div class="flex gap-4 mt-1 p-3">
+                <p-checkbox inputId="notnull" name="notnull" value="true" [(ngModel)]="payload.notnull" [binary]="true"/>
+                <label for="notnull" class="ml-2">Not null</label>
+            </div>
+            <div class="flex gap-4 mt-1 p-3">
+                <p-floatlabel variant="on">
+                    <input pInputText id="default" [(ngModel)]="payload.default" autocomplete="off" />
+                    <label for="default">Default value</label>
+                </p-floatlabel>
+            </div>
             <div class="flex gap-4 mt-1 p-3">       
                 <p-checkbox inputId="active" name="active" value="true" [(ngModel)]="payload.active" [binary]="true"/>
                 <label for="active" class="ml-2"> Active </label>                  

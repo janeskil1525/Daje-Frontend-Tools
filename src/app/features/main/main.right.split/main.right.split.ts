@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { GenerateSqlComponent } from "../../generators/generate.sql.component/generate.sql.component";
+import {Divider} from "primeng/divider";
+import {RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-main-right-split',
-  imports: [GenerateSqlComponent],
+    imports: [Divider, RouterOutlet],
   templateUrl: './main.right.split.html',
   styleUrl: './main.right.split.scss',
   standalone:true,

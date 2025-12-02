@@ -3,6 +3,7 @@ import { ProjectsComponent } from '../../project/projects.component/projects.com
 import { ProjectNewComponent } from "../../project/project.new.component/project.new.component";
 import { DividerModule } from 'primeng/divider';
 import {RouterOutlet} from "@angular/router";
+import {VersionService} from "../../../core/build.version.service/version-service";
 
 @Component({
   selector: 'app-main-left-split',
@@ -17,5 +18,9 @@ import {RouterOutlet} from "@angular/router";
     standalone:true,
 })
 export class MainLeftSplit {
+    version_label: string = "";
+    constructor(private version: VersionService){
+        this.version_label = version.getVersion();
+    }
 
 }

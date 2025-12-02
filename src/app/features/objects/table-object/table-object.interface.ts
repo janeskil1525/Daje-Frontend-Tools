@@ -11,4 +11,7 @@ export interface TableObjectInterface extends ResponseBase {
     scale: number,
     active: boolean,
     visible: boolean,
+    notnull: boolean,
+    default: string,
+    foreign_key: boolean
 }
