@@ -75,6 +75,7 @@ export class TableObjectComponent {
       if(!this.payload.visible) this.payload.visible = false;
       if(!this.payload.notnull) this.payload.notnull = false;
       if(!this.payload.foreign_key) this.payload.foreign_key = false;
+      if(!this.payload.unique) this.payload.unique = false;
       this.payload.tools_objects_tables_datatypes_fkey = tools_objects_tables_datatypes_pkey;
       this.workflow.callWorkflow(
         'tools', 'save_object_table', this.payload
