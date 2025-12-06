@@ -56,6 +56,7 @@ export class TableObjectComponent {
                   if(this.payload.visible) this.payload.visible=true;
                   if(this.payload.notnull) this.payload.notnull=true
                   if(this.payload.foreign_key) this.payload.foreign_key=true
+                  if(this.payload.unique) this.payload.unique = true;
                   this.tools_objects_tables_datatypes_pkey = this.payload.tools_objects_tables_datatypes_fkey
                   this.setupGUI(this.tools_objects_tables_datatypes_pkey);
                   if(!this.payload.tools_version_fkey || this.payload.tools_version_fkey ===0) {
