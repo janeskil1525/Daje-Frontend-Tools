@@ -68,6 +68,7 @@ export class ObjectComponent {
     }
 
     saveObject() {
+        this.workflow.setConnectorData('tools_projects', this.tools_projects_pkey)
         this.payload.tools_object_types_fkey = this.tools_object_types_pkey;
         this.workflow.callWorkflow(
             'tools', 'save_object', this.payload

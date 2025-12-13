@@ -77,7 +77,7 @@ export class ObjectTreelistComponent{
     }
     if (type === "tools_version") {
 
-    } else if ( type === "tools_objects1") {
+    } else if ( type === "tools_objects1" || type === "tools_objects2" || type === "tools_objects3") {
         this.tools_objects_pkey = data.tools_objects_pkey;
         this.router.navigate(
             ['main',
@@ -93,8 +93,6 @@ export class ObjectTreelistComponent{
                 }
             ]
         );
-    } else if ( type === "tools_objects2") {
-
     } else if ( type === 'tools_object_tables') {
         this.router.navigate(
             ['main',
@@ -131,7 +129,22 @@ export class ObjectTreelistComponent{
                 }
             ]
         );
-    }
+    } else if ( type === "tools_objects3" ) {
+          this.router.navigate(
+              ['main',
+                  {
+                      outlets: {
+                          middle_split:
+                              ['sql',
+                                  this.tools_version_pkey,
+                                  node.data.tools_objects_pkey,
+                                  0
+                              ]
+                      }
+                  }
+              ]
+          );
+      }
   }
 
   addObject(node: any, object_type:number) {
@@ -171,8 +184,24 @@ export class ObjectTreelistComponent{
                     }
                 ],
             },
-            {label:'Index', icon: PrimeIcons.PLUS, command: (event) => this.addObject(this.selectedNode, 2)},
-            {label:'SQL', icon: PrimeIcons.PLUS, command: (event) => this.addObject(this.selectedNode, 3)},
+            {
+                label:'Index',
+                icon: PrimeIcons.PLUS,
+                command: (event) => this.addObject(this.selectedNode, 2),
+
+            },
+            {
+                label:'SQL',
+                icon: PrimeIcons.PLUS,
+                command: (event) => this.addObject(this.selectedNode, 3),
+                items:[
+                    {
+                        label: 'SQL',
+                        icon: PrimeIcons.PLUS,
+                        command: (event) => this.addItem(this.selectedNode, 3)
+                    }
+                ]
+            },
             {label:'View', icon: PrimeIcons.PLUS, command: (event) => this.addObject(this.selectedNode, 4)}
         ];
     }

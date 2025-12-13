@@ -26,6 +26,7 @@ import {Checkbox} from "primeng/checkbox";
 })
 export class GenerateSqlComponent {
     payload = {} as VersionsInterface;
+    tools_projects_pkey: number = 0;
     private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 
     constructor( 
@@ -33,17 +34,17 @@ export class GenerateSqlComponent {
         private database: DatabaseService
     ) {
         this.activatedRoute.params.subscribe((params) => {
-            let tools_projects_pkey: number = parseInt(params['tools_projects_pkey']);
-            this.database.load_record('CurrentVersion', tools_projects_pkey).subscribe((response: VersionsInterface)=> {
+            this.tools_projects_pkey = parseInt(params['tools_projects_pkey']);
+            this.database.load_record('CurrentVersion', this.tools_projects_pkey).subscribe((response: VersionsInterface)=> {
                 this.payload = response
             });
         });
     }
 
     generateSQL() {
-
+        this.workflow.setConnectorData('tools_projects', 0)
         this.workflow.callWorkflow(
-            'tools_generate_sql', 'save_object_table', this.payload
+            'tools_generate_sql', 'generate_sql', this.payload
         );
     }
 

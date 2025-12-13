@@ -5,6 +5,7 @@ import {TabsTreelistsComponent} from "./features/menu/tabs.treelists.component/t
 import {TableObjectComponent} from "./features/objects/table-object/table-object.component";
 import {ObjectComponent} from "./features/objects/object.component/object.component";
 import {GenerateSqlComponent} from "./features/generators/generate.sql.component/generate.sql.component";
+import {TableObjectSqlComponent} from "./features/objects/table-object-sql/table.object.sql.component";
 
 
 
@@ -34,6 +35,11 @@ export const routes: Routes = [
             {
                 path:'tables/:tools_version_pkey/:tools_objects_pkey/:tools_object_tables_pkey',
                 component:TableObjectComponent,
+                outlet: 'middle_split',
+            },
+            {
+                path:'sql/:tools_version_pkey/:tools_objects_pkey/:tools_object_sql_pkey',
+                component: TableObjectSqlComponent,
                 outlet: 'middle_split',
             },
             {

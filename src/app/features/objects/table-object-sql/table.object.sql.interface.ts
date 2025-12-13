@@ -5,4 +5,6 @@ export interface TableObjectSqlInterface extends ResponseBase {
     tools_version_fkey:number,
     tools_objects_fkey:number,
     sql_string:string,
+    comment:string,
+    name:string,
 }
